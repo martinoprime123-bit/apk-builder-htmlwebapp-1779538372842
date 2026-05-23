@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>HTML2APK Converter - Ubah HTML ke APK Android</title>
+    <!-- Font Awesome Icons (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0b1120 0%, #111827 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(2px);
+            border-radius: 2.5rem;
+            padding: 1.8rem;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFFFFF, #94A3F8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h1 i {
+            background: none;
+            color: #c084fc;
+            font-size: 2rem;
+        }
+
+        .sub {
+            color: #9ca3af;
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+            border-left: 3px solid #8b5cf6;
+            padding-left: 1rem;
+        }
+
+        .card {
+            background: #1e293be6;
+            border-radius: 1.8rem;
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px dashed #475569;
+            padding-bottom: 0.6rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            color: #cbd5e6;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            color: #f1f5f9;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #a78bfa;
+            box-shadow: 0 0 0 2px rgba(167,139,250,0.3);
+        }
+
+        textarea {
+            font-family: 'Fira Code', monospace;
+            resize: vertical;
+            min-height: 240px;
+        }
+
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        .btn {
+            background: linear-gradient(95deg, #3b2b5e, #6d28d9);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(95deg, #4f46e5, #7c3aed);
+            box-shadow: 0 4px 12px rgba(79,70,229,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #7c3aed;
+            color: #c4b5fd;
+        }
+
+        .btn-outline:hover {
+            background: #2d1b4e;
+        }
+
+        .alert {
+            background: #2e213a;
+            border-left: 5px solid #a855f7;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+            color: #e9d5ff;
+        }
+
+        .alert-error {
+            border-left-color: #f43f5e;
+            background: #3c1e2a;
+            color: #ffcbd6;
+        }
+
+        .alert-success {
+            border-left-color: #22c55e;
+            background: #164e2e80;
+        }
+
+        .preview-box {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid #2d3a5e;
+        }
+
+        .download-btn {
+            background: #059669;
+            padding: 0.8rem 1.6rem;
+            font-size: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #4b5563;
+            margin-top: 2rem;
+        }
+
+        .code-hint {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 1rem; }
+            .card { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div>
+            <h1><i class="fas fa-file-code"></i> HTML2APK <span style="font-size: 1.4rem;">⚡</span></h1>
+            <div class="sub">Konversi file HTML menjadi APK Android siap pakai. Gunakan GitHub API untuk build & publikasi.</div>
+        </div>
+        <i class="fab fa-android" style="font-size: 3rem; color: #3ddc84; opacity: 0.7;"></i>
+    </div>
+
+    <!-- FORM UTAMA -->
+    <div class="card">
+        <div class="card-title"><i class="fas fa-key"></i> 1. Otentikasi GitHub (API Key)</div>
+        <label><i class="fab fa-github"></i> GitHub Personal Access Token (classic) <span style="color:#f87171;">*</span></label>
+        <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+        <div class="code-hint"><i class="fas fa-info-circle"></i> Token memerlukan scope 'repo' & 'workflow' untuk membuat gist/repo. Simpan dengan aman.</div>
+        
+        <label><i class="fas fa-tag"></i> Nama Proyek / Package (tanpa spasi)</label>
+        <input type="text" id="projectName" placeholder="mywebapp" value="htmlwebapp">
+        <div class="code-hint">Digunakan untuk ID aplikasi & folder (contoh: com.converter.app)</div>
+        
+        <label><i class="fas fa-palette"></i> Nama Aplikasi (Judul APK)</label>
+        <input type="text" id="appName" placeholder="WebView App" value="HTML2APK Converter">
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-code"></i> 2. File HTML / Kode Sumber Web</div>
+        <label><i class="fas fa-upload"></i> Upload file HTML <span style="font-size:0.8rem;">(atau paste di bawah)</span></label>
+        <input type="file" id="htmlFileInput" accept=".html, .htm">
+        <label><i class="fas fa-edit"></i> Atau edit konten HTML secara langsung:</label>
+        <textarea id="htmlContent" placeholder="<html><head><title>My App</title>...</html>"></textarea>
+        <div class="flex-row">
+            <button class="btn btn-outline" id="loadSampleBtn"><i class="fas fa-fill-drip"></i> Contoh HTML</button>
+            <button class="btn btn-outline" id="clearHtmlBtn"><i class="fas fa-trash-alt"></i> Bersihkan</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><i class="fas fa-cogs"></i> 3. Build & Konversi ke APK (via GitHub API)</div>
+        <p style="color:#b9c3db; margin-bottom: 1rem; font-size:0.85rem;">Proses: kami akan membuat repository template WebView Android, mengganti asset HTML Anda, lalu memicu GitHub Actions untuk menghasilkan file APK. Setelah selesai, Anda bisa download APK langsung.</p>
+        <button class="btn btn-primary" id="buildApkBtn"><i class="fab fa-android"></i> Generate APK Sekarang</button>
+        <div id="statusMessage" class="alert" style="display: none;"></div>
+        <div id="downloadSection" style="display: none; margin-top: 1rem;">
+            <button class="btn download-btn" id="downloadApkBtn"><i class="fas fa-download"></i> Unduh APK (build terbaru)</button>
+            <p class="code-hint" style="margin-top: 0.8rem;"><i class="fab fa-github"></i> * APK akan dihasilkan oleh workflow GitHub, link download sementara berlaku 60 menit. Refresh jika perlu.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <i class="fas fa-shield-alt"></i> Proses aman via GitHub API · HTML langsung diinject ke WebView Android · Source build modern
+    </footer>
+</div>
+
+<script>
+    // ---------- DOM Elements ----------
+    const githubTokenInput = document.getElementById('githubToken');
+    const projectNameInput = document.getElementById('projectName');
+    const appNameInput = document.getElementById('appName');
+    const htmlContentTextarea = document.getElementById('htmlContent');
+    const htmlFileInput = document.getElementById('htmlFileInput');
+    const loadSampleBtn = document.getElementById('loadSampleBtn');
+    const clearHtmlBtn = document.getElementById('clearHtmlBtn');
+    const buildBtn = document.getElementById('buildApkBtn');
+    const statusDiv = document.getElementById('statusMessage');
+    const downloadSection = document.getElementById('downloadSection');
+    const downloadApkBtn = document.getElementById('downloadApkBtn');
+
+    // State / cache untuk URL download terbaru
+    let latestApkDownloadUrl = null;
+    let latestArtifactId = null;
+    let currentRepoName = null;
+
+    // Fungsi bantu: show status
+    function showStatus(message, type = 'info') {
+        statusDiv.style.display = 'block';
+        statusDiv.innerHTML = `<i class="fas ${type === 'error' ? 'fa-exclamation-triangle' : (type === 'success' ? 'fa-check-circle' : 'fa-info-circle')}"></i> ${message}`;
+        statusDiv.className = `alert ${type === 'error' ? 'alert-error' : (type === 'success' ? 'alert-success' : '')}`;
+        if (type === 'success') {
+            setTimeout(() => {
+                if (statusDiv.innerText.includes(message)) {
+                    // tidak auto hide terlalu cepat
+                }
+            }, 5000);
+        }
+    }
+
+    function hideStatus() { statusDiv.style.display = 'none'; }
+
+    // Membaca file HTML
+    htmlFileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                htmlContentTextarea.value = ev.target.result;
+                showStatus(`File "${file.name}" berhasil dimuat.`, 'success');
+            };
+            reader.onerror = () => showStatus('Gagal membaca file.', 'error');
+            reader.readAsText(file);
+        }
+    });
+
+    // Contoh HTML minimal
+    loadSampleBtn.addEventListener('click', () => {
+        htmlContentTextarea.value = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Aplikasi Web Saya</title>
+    <style>
+        body {
+            font-family: system-ui, 'Segoe UI', sans-serif;
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 2rem;
+            backdrop-filter: blur(8px);
+        }
+        button {
+            background: #8b5cf6;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>✨ Sukses di Android ✨</h1>
+        <p>Konten HTML asli Anda muncul di dalam WebView APK.</p>
+        <button onclick="alert('Halo dari HTML!')">Klik Saya</button>
+    </div>
+</body>
+</html>`;
+        showStatus('Contoh HTML siap, silakan edit sesuai keinginan.', 'success');
+    });
+
+    clearHtmlBtn.addEventListener('click', () => {
+        htmlContentTextarea.value = '';
+        showStatus('Konten HTML dikosongkan.', 'info');
+    });
+
+    // --- Fungsi utama membuat repository + workflow + mengunggah HTML ke repo ---
+    async function buildApk() {
+        const token = githubTokenInput.value.trim();
+        if (!token) {
+            showStatus('Masukkan GitHub Personal Access Token terlebih dahulu!', 'error');
+            return;
+        }
+        let projectName = projectNameInput.value.trim();
+        if (!projectName) projectName = "htmlwebapp";
+        // sanitasi nama repo
+        projectName = projectName.replace(/[^a-zA-Z0-9\-_]/g, '-').toLowerCase();
+        if (projectName.length < 1) projectName = "mywebapp";
+        const appTitle = appNameInput.value.trim() || "HTML2APK App";
+        let htmlRaw = htmlContentTextarea.value.trim();
+        if (!htmlRaw) {
+            showStatus('Harap isi konten HTML atau upload file HTML terlebih dahulu.', 'error');
+            return;
+        }
+
+        // validasi minimal html
+        if (!htmlRaw.toLowerCase().includes('<html')) {
+            htmlRaw = `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${appTitle}</title></head><body>${htmlRaw}</body></html>`;
+        }
+
+        showStatus('⏳ Menyiapkan repository & workflow di GitHub. Mohon tunggu...', 'info');
+        buildBtn.disabled = true;
+        buildBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Proses membangun...';
+
+        try {
+            // 1. Buat repository publik dengan template sederhana (menggunakan GitHub API)
+            const repoName = `apk-builder-${projectName}-${Date.now()}`;
+            currentRepoName = repoName;
+            const createRepoRes = await fetch('https://api.github.com/user/repos', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: repoName,
+                    description: 'HTML to APK auto build via WebView',
+                    private: false,
+                    auto_init: true
+                })
+            });
+            if (!createRepoRes.ok) {
+                let errMsg = `Gagal buat repo: ${createRepoRes.status}`;
+                try { const errData = await createRepoRes.json(); errMsg += ` - ${errData.message}`; } catch(e) {}
+                throw new Error(errMsg);
+            }
+            const repoData = await createRepoRes.json();
+            const owner = repoData.owner.login;
+            const repoFull = `${owner}/${repoName}`;
+            showStatus(`✅ Repository ${repoFull} dibuat. Mengunggah file Android & HTML...`, 'info');
+
+            // 2. Siapkan struktur gradle android sederhana (base64 file)
+            // Kita akan membuat workflow .github/workflows/build-apk.yml dan file MainActivity.kt beserta assets
+            // Gunakan pendekatan: replace isi file index.html di dalam folder app/src/main/assets/
+            
+            // a) Buat folder structure melalui GitHub API (multiple file commit)
+            // Karena kita perlu beberapa file, lebih mudah dengan get sha & commit tree. 
+            // Implementasi: commit file index.html ke path app/src/main/assets/index.html
+            // dan file build.gradle, manifest, workflow.
+            
+            // mendapatkan commit SHA dari branch default (main)
+            const branchRes = await fetch(`https://api.github.com/repos/${owner}/${repoName}/git/refs/heads/main`, {
+                headers: { 'Authorization': `token ${token}` }
+            });
+            if (!branchRes.ok) throw new Error('Gagal mendapatkan branch default');
+            const branchData = await branchRes.json();
+            const latestCommitSha = branchData.object.sha;
+
+            // Dapatkan tree terbaru
+            const treeRes = await fetch(`https://api.github.com/repos/${owner}/${repoName}/git/trees/${latestCommitSha}`, {
+                headers: { 'Authorization': `token ${token}` }
+            });
+            const treeData = await treeRes.json();
+            
+            // Siapkan blobs untuk file penting:
+            // - index.html (dari user)
+            const htmlBlob = await createBlob(token, owner, repoName, htmlRaw);
+            // - activity_main.xml sederhana (layout)
+            const layoutXml = `<?xml version="1.0" encoding="utf-8"?>
+<WebView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/webview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />`;
+            const layoutBlob = await createBlob(token, owner, repoName, layoutXml);
+            // - AndroidManifest.xml
+            const manifestXml = `<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.html2apk.${projectName.replace(/-/g, '_')}">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application android:allowBackup="true" android:label="${appTitle}" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".MainActivity" android:exported="true">
+            <intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter>
+        </activity>
+    </application>
+</manifest>`;
+            const manifestBlob = await createBlob(token, owner, repoName, manifestXml);
+            // build.gradle (app level)
+            const appGradle = `apply plugin: 'com.android.application'
+android {
+    compileSdk 34
+    defaultConfig {
+        applicationId "com.html2apk.${projectName.replace(/-/g, '_')}"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes { release { minifyEnabled false } }
+}
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.webkit:webkit:1.9.0'
+}`;
+            const appGradleBlob = await createBlob(token, owner, repoName, appGradle);
+            // MainActivity.kt
+            const mainActivityKt = `package com.html2apk.${projectName.replace(/-/g, '_')}
+import android.os.Bundle
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val webView: WebView = findViewById(R.id.webview)
+        webView.webViewClient = WebViewClient()
+        webView.settings.javaScriptEnabled = true
+        webView.loadUrl("file:///android_asset/index.html")
+    }
+}`;
+            const mainBlob = await createBlob(token, owner, repoName, mainActivityKt);
+            
+            // workflow yml
+            const workflowYml = `name: Build APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with: { distribution: 'temurin', java-version: '17' }
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+    - name: Build APK
+      run: |
+        chmod +x gradlew
+        ./gradlew assembleRelease
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release
+        path: app/build/outputs/apk/release/*.apk`;
+            const workflowBlob = await createBlob(token, owner, repoName, workflowYml);
+
+            // Buat tree baru dengan file-file tsb
+            const newTree = {
+                base_tree: treeData.sha,
+                tree: [
+                    { path: "app/src/main/assets/index.html", mode: "100644", type: "blob", sha: htmlBlob.sha },
+                    { path: "app/src/main/res/layout/activity_main.xml", mode: "100644", type: "blob", sha: layoutBlob.sha },
+                    { path: "app/src/main/AndroidManifest.xml", mode: "100644", type: "blob", sha: manifestBlob.sha },
+                    { path: "app/build.gradle", mode: "100644", type: "blob", sha: appGradleBlob.sha },
+                    { path: "app/src/main/java/com/html2apk/${projectName.replace(/-/g, '_')}/MainActivity.kt", mode: "100644", type: "blob", sha: mainBlob.sha },
+                    { path: ".github/workflows/build-apk.yml", mode: "100644", type: "blob", sha: workflowBlob.sha }
+                ]
+            };
+            const createTreeRes = await fetch(`https://api.github.com/repos/${owner}/${repoName}/git/trees`, {
+                method: 'POST',
+                headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify(newTree)
+            });
+            if (!createTreeRes.ok) throw new Error('Gagal membuat tree');
+            const newTreeData = await createTreeRes.json();
+            
+            // Buat commit
+            const commitRes = await fetch(`https://api.github.com/repos/${owner}/${repoName}/git/commits`, {
+                method: 'POST',
+                headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: 'Add Android WebView App and HTML asset',
+                    tree: newTreeData.sha,
+                    parents: [latestCommitSha]
+                })
+            });
+            if (!commitRes.ok) throw new Error('Gagal commit');
+            const commitData = await commitRes.json();
+            // Update branch HEAD
+            await fetch(`https://api.github.com/repos/${owner}/${repoName}/git/refs/heads/main`, {
+                method: 'PATCH',
+                headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sha: commitData.sha, force: false })
+            });
+            
+            showStatus('✅ Workflow otomatis berjalan di GitHub Actions. APK sedang dibangun (sekitar 1-2 menit). Tunggu sebentar lalu klik unduh...', 'success');
+            // polling untuk artifact
+            await waitForArtifactAndDownloadUrl(token, owner, repoName);
+            
+        } catch (err) {
+            console.error(err);
+            showStatus(`Error: ${err.message}`, 'error');
+            buildBtn.disabled = false;
+            buildBtn.innerHTML = '<i class="fab fa-android"></i> Generate APK Sekarang';
+        }
+    }
+    
+    async function createBlob(token, owner, repo, content) {
+        const enc = new TextEncoder().encode(content);
+        const base64Content = btoa(String.fromCharCode(...enc));
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/blobs`, {
+            method: 'POST',
+            headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: base64Content, encoding: 'base64' })
+        });
+        if (!res.ok) throw new Error(`Gagal membuat blob: ${res.status}`);
+        return await res.json();
+    }
+    
+    async function waitForArtifactAndDownloadUrl(token, owner, repo) {
+        let attempts = 0;
+        const maxAttempts = 18; // ~90 detik
+        while (attempts < maxAttempts) {
+            await new Promise(r => setTimeout(r, 7000));
+            const runsRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/runs?per_page=1`, {
+                headers: { 'Authorization': `token ${token}` }
+            });
+            const runs = await runsRes.json();
+            if (runs.workflow_runs && runs.workflow_runs.length > 0) {
+                const latestRun = runs.workflow_runs[0];
+                if (latestRun.status === 'completed' && latestRun.conclusion === 'success') {
+                    const artifactsRes = await fetch(latestRun.artifacts_url, { headers: { 'Authorization': `token ${token}` } });
+                    const artifacts = await artifactsRes.json();
+                    if (artifacts.artifacts && artifacts.artifacts.length > 0) {
+                        const apkArtifact = artifacts.artifacts.find(a => a.name.includes('app-release'));
+                        if (apkArtifact) {
+                            const downloadUrl = apkArtifact.archive_download_url;
+                            latestApkDownloadUrl = downloadUrl;
+                            downloadSection.style.display = 'block';
+                            showStatus('APK berhasil dihasilkan! Klik tombol Unduh APK.', 'success');
+                            buildBtn.disabled = false;
+                            buildBtn.innerHTML = '<i class="fab fa-android"></i> Generate APK Sekarang';
+                            return;
+                        }
+                    }
+                } else if (latestRun.status === 'completed' && latestRun.conclusion !== 'success') {
+                    showStatus('Workflow gagal, periksa log GitHub Actions', 'error');
+                    buildBtn.disabled = false;
+                    buildBtn.innerHTML = '<i class="fab fa-android"></i> Generate APK Sekarang';
+                    return;
+                }
+            }
+            attempts++;
+        }
+        showStatus('Waktu habis menunggu artifact. Coba refresh atau periksa repo actions.', 'error');
+        buildBtn.disabled = false;
+        buildBtn.innerHTML = '<i class="fab fa-android"></i> Generate APK Sekarang';
+    }
+    
+    downloadApkBtn.addEventListener('click', async () => {
+        if (!latestApkDownloadUrl) {
+            showStatus('Tidak ada link APK. Silakan generate terlebih dahulu.', 'error');
+            return;
+        }
+        const token = githubTokenInput.value.trim();
+        if (!token) { showStatus('Token diperlukan untuk download', 'error'); return; }
+        try {
+            const res = await fetch(latestApkDownloadUrl, { headers: { 'Authorization': `token ${token}` } });
+            if (!res.ok) throw new Error('Gagal fetch artifact');
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${projectNameInput.value.trim() || 'app'}.apk`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        } catch(e) { showStatus(`Gagal unduh: ${e.message}`, 'error'); }
+    });
+    
+    buildBtn.addEventListener('click', buildApk);
+</script>
+</body>
+</html>
